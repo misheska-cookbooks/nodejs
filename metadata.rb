@@ -1,0 +1,11 @@
+name             'nodejs'
+maintainer       'Mischa Taylor'
+maintainer_email 'mischa@misheska.com'
+license          'Apache 2.0'
+description      'Installs/Configures nodejs'
+long_description 'Installs/Configures nodejs'
+version          '0.1.0'
+
+depends 'build-essential'
+depends 'apt'
+depends 'yum-epel'
