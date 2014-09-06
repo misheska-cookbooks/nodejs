@@ -14,8 +14,6 @@ platforms:
       provider: <%= vagrant_provider %>
       box: box-cutter/ubuntu1404
       box_url: box-cutter/ubuntu1404
-      network:
-      - ["private_network", {ip: "192.168.33.33"}]
       customize:
         cpus: 2
         memory: 1024
@@ -25,8 +23,6 @@ platforms:
       provider: <%= vagrant_provider %>
       box: box-cutter/centos70
       box_url: box-cutter/centos70
-      network:
-      - ["private_network", {ip: "192.168.33.34"}]
       customize:
         cpus: 2
         memory: 1024
