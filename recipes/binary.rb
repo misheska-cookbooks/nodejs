@@ -4,7 +4,13 @@ nodejs_basename = ::File.basename(nodejs_url, '.tar.gz')
 nodejs_tarball_path = "#{Chef::Config[:file_cache_path]}/#{nodejs_tar_gz}"
 nodejs_extract_path = node['nodejs']['install_dir']
 
-install_needed = !File.exists?("#{node['nodejs']['dir']}/bin/node") || Mixlib::ShellOut.new("#{nodejs_extract_path}/bin/node --version").run_command.error?.chomp != "v#{node['nodejs']['version']}" 
+begin
+  node_version = Mixlib::ShellOut.new("#{nodejs_extract_path}/bin/node --version")
+  node_version.run_command
+  install_needed = !File.exists?("#{node['nodejs']['dir']}/bin/node") || node_version.stdout.chomp != "v#{node['nodejs']['version']}"
+rescue
+  install_needed = !File.exists?("#{node['nodejs']['dir']}/bin/node")
+end
 
 Chef::Log.info("mischa: nodejs_url=#{nodejs_url}")
 Chef::Log.info("mischa: nodejs_tar_gz=#{nodejs_tar_gz}")
