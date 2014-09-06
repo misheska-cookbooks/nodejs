@@ -1,5 +1,5 @@
 <%
-vagrant_provider = ENV['VAGRANT_PROVIDER'] ? ENV['VAGRANT_PROVIDER'] : 'vmware_fusion'
+vagrant_provider = ENV['VAGRANT_PROVIDER'] ? ENV['VAGRANT_PROVIDER'] : 'virtualbox'
 %>
 ---
 driver:
@@ -20,11 +20,11 @@ platforms:
         cpus: 2
         memory: 1024
 
-  - name: centos65
+  - name: centos70
     driver:
       provider: <%= vagrant_provider %>
-      box: box-cutter/centos65
-      box_url: box-cutter/centos65
+      box: box-cutter/centos70
+      box_url: box-cutter/centos70
       network:
       - ["private_network", {ip: "192.168.33.34"}]
       customize:
@@ -35,4 +35,19 @@ suites:
   - name: default
     run_list:
       - recipe[nodejs::default]
+    attributes:
+
+  - name: binary
+    run_list:
+      - recipe[nodejs::binary]
+    attributes:
+
+  - name: package
+    run_list:
+      - recipe[nodejs::package]
+    attributes:
+
+  - name: source
+    run_list:
+      - recipe[nodejs::source]
     attributes:
