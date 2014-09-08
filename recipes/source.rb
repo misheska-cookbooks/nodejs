@@ -20,8 +20,8 @@ num_build_threads = num_cores.stdout.to_i + 1
 
 remote_file nodejs_tarball_path do
   source nodejs_source_url
-  notifies :run, "execute[unpack #{nodejs_tarball_path}]"
-  notifies :run, "execute[build #{nodejs_tarball_path}]"
+  notifies :run, "execute[unpack #{nodejs_tarball_path}]", :immediately
+  notifies :run, "execute[build #{nodejs_tarball_path}]", :immediately
 end
 
 execute "unpack #{nodejs_tarball_path}" do

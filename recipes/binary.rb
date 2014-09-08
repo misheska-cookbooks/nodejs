@@ -20,7 +20,7 @@ Chef::Log.info("mischa: nodejs_extract_path=#{nodejs_extract_path}")
 
 remote_file nodejs_tarball_path do
   source nodejs_url
-  notifies :run, "execute[unpack #{nodejs_tarball_path}]"
+  notifies :run, "execute[unpack #{nodejs_tarball_path}]", :immediately
 end
 
 execute "unpack #{nodejs_tarball_path}" do
