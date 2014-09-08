@@ -19,7 +19,7 @@ remote_file nodejs_tarball_path do
 end
 
 execute "unpack #{nodejs_tarball_path}" do
-  Chef::Log.info("Extracting #{nodejs_tarball_path} to #{nodejs_extract_path}"
+  Chef::Log.info("Extracting #{nodejs_tarball_path} to #{nodejs_extract_path}")
   command "tar --strip-components=1 -xvf #{nodejs_tarball_path} -C #{nodejs_extract_path} #{nodejs_basename}/bin #{nodejs_basename}/lib #{nodejs_basename}/share"
   action :nothing
   only_if { install_needed }
