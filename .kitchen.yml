@@ -33,17 +33,35 @@ suites:
       - recipe[nodejs::default]
     attributes:
 
-  - name: binary
+  - name: binary-latest
     run_list:
       - recipe[nodejs::binary]
     attributes:
+      nodejs:
+        version: 'latest'
+
+  - name: binary-old-version
+    run_list:
+      - recipe[nodejs::binary]
+    attributes:
+      nodejs:
+        version: '0.10.30'
 
   - name: package
     run_list:
       - recipe[nodejs::package]
     attributes:
 
-  - name: source
+  - name: source-latest
     run_list:
       - recipe[nodejs::source]
     attributes:
+      nodejs:
+        version: 'latest'
+
+  - name: source-old-version
+    run_list:
+      - recipe[nodejs::source]
+    attributes:
+      nodejs:
+        version: '0.10.30'
