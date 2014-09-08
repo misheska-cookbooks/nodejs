@@ -12,18 +12,14 @@ rescue
   install_needed = !File.exists?("#{node['nodejs']['dir']}/bin/node")
 end
 
-Chef::Log.info("mischa: nodejs_url=#{nodejs_url}")
-Chef::Log.info("mischa: nodejs_tar_gz=#{nodejs_tar_gz}")
-Chef::Log.info("mischa: nodejs_basename=#{nodejs_basename}")
-Chef::Log.info("mischa: nodejs_tarball_path=#{nodejs_tarball_path}")
-Chef::Log.info("mischa: nodejs_extract_path=#{nodejs_extract_path}")
-
 remote_file nodejs_tarball_path do
+  Chef::Log.info("Downloading #{nodejs_tarball_path} from #{nodejs_url}")
   source nodejs_url
   notifies :run, "execute[unpack #{nodejs_tarball_path}]", :immediately
 end
 
 execute "unpack #{nodejs_tarball_path}" do
+  Chef::Log.info("Extracting #{nodejs_tarball_path} to #{nodejs_extract_path}"
   command "tar --strip-components=1 -xvf #{nodejs_tarball_path} -C #{nodejs_extract_path} #{nodejs_basename}/bin #{nodejs_basename}/lib #{nodejs_basename}/share"
   action :nothing
   only_if { install_needed }
